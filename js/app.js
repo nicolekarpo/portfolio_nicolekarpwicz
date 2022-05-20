@@ -41,7 +41,7 @@ async function getPost(pageValue) {
 async function getPosts() {
     
     const posts =  await fetch(`https://06l51xgj.api.sanity.io/v1/data/query/production?query=*`);
-    [_type == 'post']
+    ['_type' == 'post']
    
     const { result } = await posts.json();
 
@@ -56,8 +56,6 @@ async function getPosts() {
 
     
     result.forEach(post => {
-  
-      
        
         const workBlock = document.createElement('a'); 
         workBlock.classList.add('work'); 
@@ -84,6 +82,7 @@ async function getPosts() {
 
  workBlock.append(handleImage(post.mainImage.asset._ref, 'work-cover'));
          worksList.append(workBlock); 
+         console.log(worksList)
     });
 
 }
