@@ -59,11 +59,12 @@ async function getPosts() {
        
         const workBlock = document.createElement('a'); 
         workBlock.classList.add('work'); 
+        if(post.slug) {
         workBlock.setAttribute(
             'href', 
             `./work.html?page=${post.slug.current}`
         ); 
-        
+        }
         
         const workTitle = document.createElement('h2'); 
         workTitle.classList.add('work-title'); 
@@ -74,15 +75,18 @@ async function getPosts() {
         workBlock.append(workMask); 
 
         const workCover = document.createElement('img'); 
-       
-        const cover = post.mainImage.asset._ref.split('-'); 
-       
-        workCover.classList.add('work-cover');
-        workCover.setAttribute('src', `${cdnUrl}${cover[1]}-${cover[2]}.${cover[3]}`);
+        
+        let cover = ''
+        if(post.mainImage) {
+            cover = post.mainImage.asset._ref.split('-'); 
+            workCover.classList.add('work-cover');
+            workCover.setAttribute('src', `${cdnUrl}${cover[1]}-${cover[2]}.${cover[3]}`);
 
- workBlock.append(handleImage(post.mainImage.asset._ref, 'work-cover'));
-         worksList.append(workBlock); 
-         console.log(worksList)
+            workBlock.append(handleImage(post.mainImage.asset._ref, 'work-cover'));
+            worksList.append(workBlock); 
+            console.log(worksList)
+        }
+        
     });
 
 }
